@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Defines the file storage engine module"""
 import json
-from models.base_model import BaseModel
+import datetime
 
 
 class FileStorage:
@@ -48,4 +48,48 @@ class FileStorage:
                     self.new(obj)
         except FileNotFoundError:
             return
+
+    def classes(self):
+        """returns a dictionary of valid classes and their references"""
+        from models.base_model import BaseModel
+        from models.user import User
+
+        classes = {
+                "Baseodel" : BaseModel,
+                "User": User,               
+                }
+        return classes
+
+    def attributes(self):
+        """returns valid attributes and their types for classname"""
+        attributes = {
+            "BaseModel":
+                    {"id": str,
+                     "created_at": datetime.datetime,
+                     "updated_at": datetime.datetime},
+            "User":
+                    {"email": str,
+                     "password": str,
+                     "last_name": str,
+                     "first_name": str},
+        }
+        return attributes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
