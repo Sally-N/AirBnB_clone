@@ -5,12 +5,10 @@ from datetime import datetime
 import models
 
 
-
 class BaseModel:
     """BaseModel class"""
     def __init__(self, *args, **kwargs):
         """Instantiation of BaseModel class"""
-        #Handle kwargs
         if kwargs:
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
@@ -25,16 +23,16 @@ class BaseModel:
 
     def __str__(self):
         """String representation of BaseModel class"""
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
-    
+        return "[{}] ({}) {}".format(self.__class__.__name__,
+                                     self.id, self.__dict__)
+
     def save(self):
-        """Updates the public instance attribute updated_at with the current datetime"""
+        """Updates the public instance attribute updated_at"""
         self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
         """Return a dictionary representation of BaseModel instance"""
-        #create shallow copy of __dict__
         dic = self.__dict__.copy()
         dic["created_at"] = self.created_at.isoformat()
         dic["updated_at"] = self.updated_at.isoformat()
