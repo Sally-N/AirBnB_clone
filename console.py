@@ -33,7 +33,7 @@ class HBNBCommand(cmd.Cmd):
             storage.new(obj)
             storage.save()
             print(obj.id)
-    
+
     def do_show(self, arg):
         """Prints the string representation of an instance"""
         args = arg.split(" ")
@@ -104,10 +104,11 @@ class HBNBCommand(cmd.Cmd):
                 value = args[3]
                 if attr in instance.__class__.__dict__.keys():
                     cast_type = type(instance.__class__.__dict__[attr])
-                    instance.__dict__[attr]  = cast_type(value)
+                    instance.__dict__[attr] = cast_type(value)
                 else:
                     instance.__dict__[attr] = value
             storage.save()
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

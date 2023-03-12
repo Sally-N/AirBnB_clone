@@ -11,8 +11,9 @@ from models.base_model import BaseModel
 class TestBaseModel_instantation(unittest.TestCase):
     """Unittests for BaseModel class instances"""
 
-    def test_new_instance_with_no_args(self):
-        self.assertEqual(BaseModel, type(BaseModel()))
+    def test_instance_with_no_args(self):
+        cls_type = type(BaseModel())
+        self.assertEqual(BaseModel, cls_type)
 
     def test_new_instance_storage(self):
         self.assertIn(BaseModel(), models.storage.all().values())
@@ -34,7 +35,8 @@ class TestBaseModel_instantation(unittest.TestCase):
     def test_new_instance_with_kwargs(self):
         dt = datetime.now()
         dt_iso_format = dt.isoformat()
-        new_obj = BaseModel(id="68976", created_at=dt_iso_format, updated_at=dt_iso_format)
+        new_obj = BaseModel(id="68976", created_at=dt_iso_format,
+                            updated_at=dt_iso_format)
         self.assertEqual(new_obj.id, "68976")
         self.assertEqual(new_obj.created_at, dt)
         self.assertEqual(new_obj.updated_at, dt)
@@ -42,7 +44,8 @@ class TestBaseModel_instantation(unittest.TestCase):
     def test_new_instance_with_args_and_kwargs(self):
         dt = datetime.now()
         dt_iso_format = dt.isoformat()
-        new_obj = BaseModel(None, id="68976", created_at=dt_iso_format, updated_at=dt_iso_format)
+        new_obj = BaseModel(None, id="68976", created_at=dt_iso_format,
+                            updated_at=dt_iso_format)
         self.assertNotIn(None, new_obj.__dict__.values())
         self.assertEqual(new_obj.id, "68976")
         self.assertEqual(new_obj.created_at, dt)
@@ -55,8 +58,10 @@ class TestBaseModel_instantation(unittest.TestCase):
         self.assertIn("[BaseModel] (68976)", new_obj_str)
         self.assertIn("'id': '68976'", new_obj_str)
 
+
 class TestBaseModel_save(unittest.TestCase):
     """ Unittests for save method in BaseModel class"""
+
     def test_save_with_arg(self):
         new_obj = BaseModel()
         with self.assertRaises(TypeError):
@@ -71,6 +76,7 @@ class TestBaseModel_save(unittest.TestCase):
             json_str = f.read()
             self.assertIn(new_obj_id, json_str)
             self.assertIn(new_obj_created.isoformat(), json_str)
+
 
 class TestBaseModel_to_dict(unittest.TestCase):
     """ Unittests for to_dict method in BaseModel class"""
@@ -93,7 +99,8 @@ class TestBaseModel_to_dict(unittest.TestCase):
     def test_to_dict_correct_output(self):
         dt = datetime.now()
         dt_iso_format = dt.isoformat()
-        new_obj = BaseModel(id="68976", created_at=dt_iso_format, updated_at=dt_iso_format)
+        new_obj = BaseModel(id="68976", created_at=dt_iso_format,
+                            updated_at=dt_iso_format)
         expected = {
             "__class__": "BaseModel",
             "id": "68976",
@@ -101,6 +108,7 @@ class TestBaseModel_to_dict(unittest.TestCase):
             "updated_at": dt_iso_format
         }
         self.assertEqual(expected, new_obj.to_dict())
+
 
 if __name__ == "__main__":
     unittest.main()
