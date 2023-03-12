@@ -8,7 +8,7 @@ from datetime import datetime
 from models.user import User
 
 
-class TestBaseModel_instantation(unittest.TestCase):
+class TestUser_instantation(unittest.TestCase):
     """Unittests for User class instances"""
 
     def test_instance_with_no_args(self):
@@ -71,7 +71,7 @@ class TestBaseModel_instantation(unittest.TestCase):
         self.assertIn("'id': '68976'", new_obj_str)
 
 
-class TestBaseModel_save(unittest.TestCase):
+class TestUser_save(unittest.TestCase):
     """ Unittests for save method in User class"""
 
     def test_save_with_arg(self):
@@ -90,7 +90,7 @@ class TestBaseModel_save(unittest.TestCase):
             self.assertIn(new_obj_created.isoformat(), json_str)
 
 
-class TestBaseModel_to_dict(unittest.TestCase):
+class TestUser_to_dict(unittest.TestCase):
     """ Unittests for to_dict method in User class"""
     def test_to_dict_with_arg(self):
         new_obj = User()
