@@ -67,7 +67,7 @@ class TestFileStorage_behaviour(unittest.TestCase):
         new_obj = BaseModel()
         models.storage.new(new_obj)
         models.storage.save()
-        models.storage.reload
+        models.storage.reload()
         objs = FileStorage._FileStorage__objects
         key = "BaseModel.{}".format(new_obj.id)
         self.assertIn(key, objs)
